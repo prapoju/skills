@@ -1,13 +1,16 @@
----
-targets: ["opencode", "claudecode"]
-description: "Conventional Commit message rules"
----
-
 # Conventional Commits
+
+## Contents
+
+- [Structure](#structure)
+- [Breaking Changes](#breaking-changes)
+- [Types](#types)
+- [Examples](#examples)
 
 A lightweight convention on top of Git commit messages. It gives every commit a
 human- and machine-readable meaning, which lets us automate changelogs, version
-bumps, and release triggers. The commit history is a way to undertsand the project not just a step to follow.
+bumps, and release triggers. The commit history is a way to understand the
+project, not just a step to follow.
 
 ## Structure
 
@@ -43,7 +46,7 @@ change:
 ```
 feat: allow provided config object to extend other configs
 
-BREAKING CHANGE: `extends` key in config file is now used for extending other config files
+BREAKING CHANGE: `extends` key is now used for extending other config files
 ```
 
 Use `!` for the fast signal, and the footer when the migration needs more than a
@@ -56,18 +59,12 @@ line of explanation. Both together are fine — the footer carries the detail.
 - **refactor** — a change to code that is neither a fix nor a feature.
 - **perf** — a change made for performance.
 - **test** — adding or correcting tests.
-- **build** — changes to the build system or external dependencies (compilers, bundlers, package versions).
+- **build** — changes to the build system or external dependencies.
 - **ci** — changes to CI configuration and scripts.
 - **docs** — documentation only.
 - **style** — formatting-only changes with no effect on behavior.
-- **chore** — routine maintenance that changes neither source nor tests (tooling config, housekeeping, ai skills).
-- **revert** — reverts a previous commit. Reference the reverted SHAs in a footer:
-
-```
-revert: let us never again speak of the noodle incident
-
-Refs: 676104e, a215868
-```
+- **chore** — routine maintenance that changes neither source nor tests.
+- **revert** — reverts a previous commit. Reference the reverted SHAs in a footer.
 
 Only `feat` and `fix` map to a version bump on their own. Every other type
 implies no release unless it carries a breaking change.
@@ -79,7 +76,7 @@ Description with a breaking change footer:
 ```
 feat: allow provided config object to extend other configs
 
-BREAKING CHANGE: `extends` key in config file is now used for extending other config files
+BREAKING CHANGE: `extends` key is now used for extending other config files
 ```
 
 `!` to draw attention to a breaking change:
@@ -92,14 +89,6 @@ Scope plus `!`:
 
 ```
 feat(api)!: send an email to the customer when a product is shipped
-```
-
-Both `!` and a `BREAKING CHANGE` footer:
-
-```
-feat!: drop support for Node 6
-
-BREAKING CHANGE: use JavaScript features not available in Node 6.
 ```
 
 No body:
