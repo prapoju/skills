@@ -1,0 +1,45 @@
+@startuml c4-component
+!include <C4/C4_Component>
+
+title Component diagram for Internet Banking System - API Application
+
+Container(spa, "Single-Page Application", "JavaScript and Angular", "Provides all of the Internet banking functionality to customers via their web browser.")
+Container(mobile_app, "Mobile App", "Xamarin", "Provides a limited subset of the Internet banking functionality to customers via their mobile device.")
+
+Container_Boundary(api, "API Application") {
+  Component(sign_in, "Sign In Controller", "Spring MVC Rest Controller", "Allows users to sign in to the Internet Banking System.")
+  Component(reset_password, "Reset Password Controller", "Spring MVC Rest Controller", "Allows users to reset their passwords with a single use URL.")
+  Component(accounts_summary, "Accounts Summary Controller", "Spring MVC Rest Controller", "Provides customers with a summary of their bank accounts.")
+  Component(security, "Security Component", "Spring Bean", "Provides functionality related to signing in, changing passwords, etc.")
+  Component(email_component, "E-mail Component", "Spring Bean", "Sends e-mails to users.")
+  Component(mainframe_facade, "Mainframe Banking System Facade", "Spring Bean", "A facade onto the mainframe banking system.")
+}
+
+ContainerDb(database, "Database", "Relational Database Schema", "Stores user registration information, hashed authentication credentials, access logs, etc.")
+System_Ext(email, "E-mail System", "The internal Microsoft Exchange e-mail system.")
+System_Ext(mainframe, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.")
+
+Rel_D(spa, sign_in, "Makes API calls to", "JSON/HTTPS")
+Rel_D(spa, reset_password, "Makes API calls to", "JSON/HTTPS")
+Rel_D(spa, accounts_summary, "Makes API calls to", "JSON/HTTPS")
+Rel_D(mobile_app, sign_in, "Makes API calls to", "JSON/HTTPS")
+Rel_D(mobile_app, reset_password, "Makes API calls to", "JSON/HTTPS")
+Rel_D(mobile_app, accounts_summary, "Makes API calls to", "JSON/HTTPS")
+
+Rel_D(sign_in, security, "Uses")
+Rel(reset_password, security, "Uses")
+Rel_D(reset_password, email_component, "Uses")
+Rel_D(accounts_summary, mainframe_facade, "Uses")
+
+Rel_D(security, database, "Reads from and writes to", "JDBC")
+Rel_D(email_component, email, "Sends e-mail using")
+Rel_D(mainframe_facade, mainframe, "Uses", "XML/HTTPS")
+
+Lay_R(sign_in, reset_password)
+Lay_R(reset_password, accounts_summary)
+Lay_R(security, email_component)
+Lay_R(email_component, mainframe_facade)
+Lay_R(spa, mobile_app)
+
+SHOW_LEGEND()
+@enduml

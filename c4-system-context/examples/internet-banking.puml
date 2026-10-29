@@ -1,0 +1,20 @@
+@startuml c4-context
+!include <C4/C4_Context>
+
+title System Context diagram for Internet Banking System
+
+Person(customer, "Personal Banking Customer", "A customer of the bank, with personal bank accounts.")
+
+Enterprise_Boundary(bank, "Big Bank plc") {
+  System(banking, "Internet Banking System", "Allows customers to view information about their bank accounts, and make payments.")
+  System_Ext(email, "E-mail System", "The internal Microsoft Exchange e-mail system.")
+  System_Ext(mainframe, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.")
+}
+
+Rel_D(customer, banking, "Views account balances, and makes payments using")
+Rel_R(banking, email, "Sends e-mail using")
+Rel_U(email, customer, "Sends e-mails to")
+Rel_D(banking, mainframe, "Gets account information from, and makes payments using")
+
+SHOW_LEGEND()
+@enduml
