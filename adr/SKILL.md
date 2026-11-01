@@ -30,10 +30,10 @@ precedence over the ones in this skill.
 
 1. **Get the topic.** Take it from the request; ask if it is missing.
 2. **Get the next number** by running
-   [scripts/next-adr-id.sh](scripts/next-adr-id.sh) with the ADR directory:
+   [scripts/next_adr_id.sh](scripts/next_adr_id.sh) with the ADR directory:
 
    ```bash
-   scripts/next-adr-id.sh <adr-dir>
+   scripts/next_adr_id.sh <adr-dir>
    ```
 3. **Derive the names.**
    - **Slug:** the topic in kebab-case, such as `database-engine-selection`.
