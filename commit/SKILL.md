@@ -8,6 +8,9 @@ allowed-tools: Bash(git *)
 
 Create a commit from the current repository changes.
 
+By default, commit on the current branch, even if it is the main branch. Create
+or switch branches only if the user asks.
+
 ## Usage
 
 Run these commands from your repository root, in order:
